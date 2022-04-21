@@ -1,0 +1,41 @@
+<h1>Show Test item</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.test_item_show_path(@socket, :show, @test_item)}>
+    <.live_component
+      module={SockethangWeb.TestItemLive.FormComponent}
+      id={@test_item.id}
+      title={@page_title}
+      action={@live_action}
+      test_item={@test_item}
+      return_to={Routes.test_item_show_path(@socket, :show, @test_item)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @test_item.name %>
+  </li>
+
+  <li>
+    <strong>Foo:</strong>
+    <%= @test_item.foo %>
+  </li>
+
+  <li>
+    <strong>Bar:</strong>
+    <%= @test_item.bar %>
+  </li>
+
+  <li>
+    <strong>Baz:</strong>
+    <%= @test_item.baz %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.test_item_show_path(@socket, :edit, @test_item), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.test_item_index_path(@socket, :index) %></span>
